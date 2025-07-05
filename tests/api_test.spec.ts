@@ -7,6 +7,41 @@ const TEST_USER = Credentials.TEST_USER;
 // Run tests serially
 test.describe.configure({ mode: 'serial' });
 
+/**
+ * @testcase 📚 DemoQA Book Store API – Full User Lifecycle
+ *
+ * @description
+ * This test suite covers the complete lifecycle of a DemoQA Book Store user:
+ * - User creation
+ * - Token generation
+ * - Book retrieval
+ * - Book addition to user profile
+ * - Book deletion
+ * - User deletion
+ *
+ * The tests are run **serially** to ensure state consistency across steps.
+ *
+ * @precondition
+ * - BASE_URL and TEST_USER are defined in the credentials helper.
+ * - Playwright's `request.newContext()` is used for isolated API context.
+ *
+ * @steps
+ * 1. **Create User** – Calls `POST /Account/v1/User` and validates the response.
+ * 2. **Generate Token** – Calls `POST /Account/v1/GenerateToken` and extracts JWT.
+ * 3. **Get Books** – Calls `GET /BookStore/v1/Books` and saves a sample ISBN.
+ * 4. **Add Book** – Calls `POST /BookStore/v1/Books` to add the selected ISBN to the user.
+ * 5. **Delete Book** – Calls `DELETE /BookStore/v1/Book` with the user's ID and ISBN.
+ * 6. **Delete User** – Calls `DELETE /Account/v1/User/{userId}` to remove the created user.
+ *
+ * @expected
+ * - Each request returns appropriate status codes (`200`, `201`, or `204`).
+ * - Response bodies include expected fields (e.g., `userID`, `books`, `isbn`).
+ * - Console logs confirm success of each step.
+ *
+ * @cleanup
+ * - Deletes the created book and user in the final steps.
+ */
+
 test.describe('📚 DemoQA Book Store API', () => {
     let context: APIRequestContext;
     let token: string;
