@@ -47,7 +47,7 @@ To run all tests:
    npx playwright test
 
 To run the Form UI test only:
-   npx playwright test tests/form_ui.spec.ts
+   npx playwright test tests/ui_testcase.spec.ts
 
 To run the Web Tables CRUD test only:
    npx playwright test tests/webtables_crud.spec.ts
